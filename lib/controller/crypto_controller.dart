@@ -9,12 +9,55 @@ import '../models/crypto_models.dart';
 class CryptoController extends GetxController {
   OrderBookModel? _orderData;
   String _suggestionSelectedPair = '';
-final List<String> _currencyPair = <String>["btcusd", "btceur", "btcgbp", "btcpax", "btcusdc", "gbpusd", "gbpeur", "eurusd", "xrpusd", "xrpeur",
-  "xrpbtc", "xrpgbp", "xrppax", "ltcusd", "ltceur", "ltcbtc", "ltcgbp", "ethusd", "etheur", "ethbtc",
-  "ethgbp", "ethpax", "ethusdc", "bchusd", "bcheur", "bchbtc", "bchgbp", "paxusd", "paxeur", "paxgbp", "xlmbtc", "xlmusd", "xlmeur",
-  "xlmgbp", "linkusd", "linkeur", "linkgbp", "linkbtc", "linketh", "omgusd", "omgeur", "omggbp", "omgbtc", "usdcusd"];
+  final List<String> _currencyPair = <String>[
+    "btcusd",
+    "btceur",
+    "btcgbp",
+    "btcpax",
+    "btcusdc",
+    "gbpusd",
+    "gbpeur",
+    "eurusd",
+    "xrpusd",
+    "xrpeur",
+    "xrpbtc",
+    "xrpgbp",
+    "xrppax",
+    "ltcusd",
+    "ltceur",
+    "ltcbtc",
+    "ltcgbp",
+    "ethusd",
+    "etheur",
+    "ethbtc",
+    "ethgbp",
+    "ethpax",
+    "ethusdc",
+    "bchusd",
+    "bcheur",
+    "bchbtc",
+    "bchgbp",
+    "paxusd",
+    "paxeur",
+    "paxgbp",
+    "xlmbtc",
+    "xlmusd",
+    "xlmeur",
+    "xlmgbp",
+    "linkusd",
+    "linkeur",
+    "linkgbp",
+    "linkbtc",
+    "linketh",
+    "omgusd",
+    "omgeur",
+    "omggbp",
+    "omgbtc",
+    "usdcusd"
+  ];
 
   List<String> get getCurrencyPair => _currencyPair;
+
   String get getSuggestionSelectedPair => _suggestionSelectedPair;
 
   OrderBookModel? get getOrderData => _orderData;
@@ -32,6 +75,7 @@ final List<String> _currencyPair = <String>["btcusd", "btceur", "btcgbp", "btcpa
     _suggestionSelectedPair = str;
     update();
   }
+
   Future<void> getCryptoRate(String str) async {
     print("Line30");
 
@@ -40,16 +84,13 @@ final List<String> _currencyPair = <String>["btcusd", "btceur", "btcgbp", "btcpa
     http.Response cryptoResponse = await http
         .get(Uri.parse("https://www.bitstamp.net/api/v2/ticker/$str"));
     print("Line32");
-   // Get.back();
+    // Get.back();
     print("Line33");
     if (cryptoResponse.statusCode == 200) {
       _cryptoData = cryptoModelFromJson(cryptoResponse.body);
       print("Line34");
 
-       update();
-
-
-
+      update();
     }
   }
 

@@ -32,7 +32,9 @@ class _CurrencyPairDetailState extends State<CurrencyPairDetail> {
                     autofocus: false,
                     decoration: const InputDecoration(
                         hintText: "Enter currency pair",
-                        border: OutlineInputBorder())),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.deepOrange),
+                        ))),
                 suggestionsCallback: (pattern) async {
                   return logic.getCurrencyPair
                       .where((u) => u.contains(pattern))
@@ -47,7 +49,7 @@ class _CurrencyPairDetailState extends State<CurrencyPairDetail> {
                   Get.dialog(Center(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      children: [
+                      children: const [
                         CircularProgressIndicator(
                           color: Colors.deepPurple,
                         ),
@@ -236,9 +238,21 @@ class _CurrencyPairDetailState extends State<CurrencyPairDetail> {
                           GetBuilder<CryptoController>(builder: (logic) {
                             return InkWell(
                                 onTap: () async {
+                                  Get.dialog(Center(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: const [
+                                        CircularProgressIndicator(
+                                          color: Colors.deepPurple,
+                                        ),
+                                      ],
+                                    ),
+                                  ));
+
                                   await cryptoController.getOrderBook();
                                   cryptoController.isClicked =
                                       !cryptoController.isClicked;
+                                  Get.back();
                                 },
                                 child: (cryptoController.isClicked)
                                     ? Align(
